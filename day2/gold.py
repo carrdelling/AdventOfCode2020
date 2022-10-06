@@ -1,0 +1,36 @@
+from collections import Counter
+
+
+def solve(data):
+
+    # parse each pattern e.g. 6-7 t: ztqhpbt
+
+    valid = 0
+    for pattern in data:
+        rule, pwd = pattern.strip().split(':')
+
+        count, char = rule.split(' ')
+        c_a, c_b = map(int, count.split('-'))
+
+        if pwd[c_a] == char and pwd[c_b] != char:
+            valid += 1
+
+        if pwd[c_a] != char and pwd[c_b] == char:
+            valid += 1
+
+    return valid
+
+
+def main():
+
+    with open('input') as in_f:
+        data = [row.strip() for row in in_f]
+
+    solution = solve(data)
+
+    print(solution)
+
+
+if __name__ == "__main__":
+
+    main()
